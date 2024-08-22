@@ -116,7 +116,7 @@
     </section>
 
     <!-- Seção 3 -->
-    <section id="section3" class="flex items-center justify-center h-screen bg-gray-200">
+    <section id="section3" class="flex items-center justify-center h-120 bg-gray-200 py-12 relative">
       <div class="container mx-auto bg-white p-6 rounded shadow-md">
         <h2 class="text-xl font-semibold mb-4">Preencha o Formulário</h2>
         <form>
@@ -179,20 +179,75 @@
       </div>
     </section>
 
-    <!-- Seção 4 -->
-    <section id="section4" class="flex items-center justify-center h-screen bg-gray-200">
-      <div class="flex flex-col items-center w-full max-w-4xl p-6 bg-white rounded shadow-md">
-        <h2 class="text-xl font-semibold mb-4">Produto para a sua cozinha</h2>
-        <div class="flex flex-col md:flex-row w-full h-full">
-          <img src="OIP.jfif" alt="Produto" class="w-full md:w-1/2 h-auto object-cover mb-4 md:mb-0">
-          <video src="907053181175767461.mp4" alt="Vídeo" class="w-full md:w-1/2 h-auto object-cover" controls></video>
+<!-- Seção 4 -->
+<!-- Seção 4 -->
+<section id="section4" class="bg-gradient-to-r from-gray-200 to-gray-300 py-12 flex items-center justify-center">
+  <div class="container mx-auto flex flex-col md:flex-row items-center justify-center max-w-6xl px-6 md:px-0">
+
+    <!-- Imagem do Produto e Descrição -->
+    <div class="flex-1 md:mr-6 mb-6 md:mb-0 flex flex-col items-center justify-center bg-white rounded-lg shadow-xl p-6 hover:shadow-2xl transition-shadow duration-300 ease-in-out">
+      <div class="flex-shrink-0 mb-4">
+        <img src="OIP.jfif" alt="Produto" class="w-full max-w-sm h-auto object-cover rounded-lg shadow-md transition-transform transform hover:scale-105 duration-300 ease-in-out">
+      </div>
+      <div class="text-center">
+        <h2 class="text-3xl font-semibold mb-4 text-gray-800 hover:text-blue-600 transition-colors duration-300 ease-in-out">Triturador Moedor de Alimentos De Alho Elétrico 250ML USB Multifuncional Para Comida Alho</h2>
+        <p class="text-gray-700 mb-4">O Triturador Moedor de Alimentos é ideal para preparar alimentos rapidamente com a conveniência da tecnologia elétrica. Compacto e eficiente, é perfeito para triturar alho e outros ingredientes com facilidade.</p>
+        
+        <!-- Avaliação e Vendas -->
+        <div class="mb-4 text-gray-600">
+          <span class="text-yellow-400 font-semibold">⭐ 5.0</span> 
+          <span class="mx-2">|</span>
+          <span>1 Avaliação</span>
+          <span class="mx-2">|</span>
+          <span>2 vendidos</span>
+        </div>
+
+        <!-- Preço -->
+        <div class="mb-4">
+          <p class="text-2xl font-bold text-gray-900">R$30,49 <span class="text-red-500 line-through">R$80,00</span></p>
+          <p class="text-lg font-semibold text-green-600">62% off</p>
+        </div>
+
+        <!-- Parcelamento -->
+        <p class="text-lg font-semibold mb-4">Cartão de Crédito: <span class="text-gray-700">6x R$5,69</span></p>
+        
+        <!-- Frete -->
+        <p class="text-lg font-semibold mb-4">Frete: <span class="text-gray-700">Frete grátis com cupom</span></p>
+
+        <!-- Quantidade -->
+        <div class="flex items-center mb-6 justify-center">
+          <label for="quantity" class="block text-sm font-medium text-gray-700 mr-4">Quantidade:</label>
+          <input type="number" id="quantity" name="quantity" min="1" max="98" value="1" class="w-24 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ease-in-out">
+        </div>
+
+        <!-- Botões de Adicionar ao Carrinho e Comprar -->
+        <div class="flex flex-col md:flex-row gap-4 items-center justify-center">
+          <a href="#" class="w-full md:w-auto py-2 px-4 bg-gray-600 text-white font-semibold rounded-lg shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 transition-colors duration-300 ease-in-out text-center">
+            Adicionar ao Carrinho
+          </a>
+          <a href="https://s.shopee.com.br/9KOg6RHWls" target="_blank" rel="noopener noreferrer" class="w-full md:w-auto py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors duration-300 ease-in-out text-center">
+            Comprar Agora
+          </a>
         </div>
       </div>
-    </section>
+    </div>
+
+    <!-- Vídeo do Produto -->
+    <div class="flex-shrink-0 w-full md:w-1/3 flex items-center justify-center">
+      <video src="907053181175767461.mp4" alt="Vídeo" class="w-full max-w-xs h-auto object-cover rounded-lg shadow-lg transition-transform transform hover:scale-105 duration-300 ease-in-out" controls></video>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
 
      <!-- Seção 5 -->
 <section id="section5" class="flex items-center justify-center h-screen bg-gray-200">
-  <div>Flexbox</div>
+
   <div class="flex flex-col items-center w-full max-w-4xl p-6 bg-white rounded shadow-md">
     <h2 class="text-xl font-semibold mb-4">Título da Seção</h2>
     <div class="flex flex-wrap justify-between w-full">
@@ -213,7 +268,7 @@
 </section>
 
 <section id="section6" class="section6-container bg-gray-200">
-  <div>Grid Layout.</div>
+ 
   <div class="section6-item">
     <h2 class="text-xl font-semibold">Item A</h2>
     <p>Conteúdo do item A.</p>
