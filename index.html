@@ -4,15 +4,331 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lista de Tarefas</title>
-  <link rel="stylesheet" href="style/index.css">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .sidebar {
+      transition: transform 0.3s ease;
+    }
+    .sidebar.open {
+      transform: translateX(0);
+    }
+    .sidebar.closed {
+      transform: translateX(-100%);
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden; /* Remove qualquer rolagem horizontal */
+    }
+    main {
+      transition: margin-left 0.3s ease;
+    }
+    .sidebar.open ~ main {
+      margin-left: 16rem; /* Correspondente à largura do menu lateral */
+    }
+    .sidebar.closed ~ main {
+      margin-left: 0;
+    }
+    .section6-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      padding: 1rem;
+      justify-items: center;
+    }
+    .section6-item {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      text-align: center;
+    }
+    @media (max-width: 768px) {
+      .grid-container {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "header"
+          "main"
+          "footer";
+      }
+    }
+  </style>
 </head>
-<body>
-  <div class="container">
-    <h1>Lista de Tarefas</h1>
-    <input type="text" id="todo-input" placeholder="Adicione uma nova tarefa">
-    <button id="add-button">Adicionar</button>
-    <ul id="todo-list"></ul>
+<body class="bg-gray-100">
+
+  <!-- Cabeçalho -->
+  <header class="bg-blue-600 text-white p-4 fixed w-full top-0 left-0 z-10">
+    <nav class="container mx-auto flex justify-between items-center">
+      <div class="text-2xl font-bold">
+        <button id="menu-toggle" class="lg:hidden focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+          </svg>
+        </button>
+        <a href="#" class="hover:text-gray-300">EH.</a>
+      </div>
+      <div class="hidden lg:flex space-x-4">
+        <a href="#section1" class="hover:text-gray-300">Lista de tarefas</a>
+        <a href="#section2" class="text-lg md:text-xl font-bold hover:text-gray-300">Listas Ordenada e Não Ordenada</a>
+        <a href="#section3" class="text-lg md:text-xl font-bold hover:text-gray-300">Formulário</a>
+        <a href="#section4" class="text-lg md:text-xl font-bold hover:text-gray-300">ImgVideo</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Menu Lateral -->
+  <aside id="sidebar" class="sidebar fixed inset-y-0 left-0 w-64 bg-blue-600 text-white p-4 lg:hidden closed">
+    <button id="close-sidebar" class="text-white absolute top-4 right-4">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+    <nav class="flex flex-col space-y-4 mt-16">
+      <a href="#section1" class="hover:text-gray-300">Lista de tarefas</a>
+      <a href="#section2" class="text-lg md:text-xl font-bold hover:text-gray-300">Listas Ordenada e Não Ordenada</a>
+      <a href="#section3" class="text-lg md:text-xl font-bold hover:text-gray-300">Formulário</a>
+      <a href="#section4" class="text-lg md:text-xl font-bold hover:text-gray-300">ImgVideo</a>
+    </nav>
+  </aside>
+
+  <!-- Corpo -->
+  <main>
+    <!-- Seção 1 -->
+    <section id="section1" class="flex items-center justify-center h-screen bg-white">
+      <div class="container mx-auto p-6 rounded shadow-md">
+        <h2 class="text-xl font-semibold mb-4">Minhas Tarefas</h2>
+        <input type="text" id="todo-input" placeholder="Adicione uma nova tarefa" class="w-full p-2 border border-gray-300 rounded mb-4">
+        <button id="add-button" class="w-full bg-green-500 text-white p-2 rounded mb-4">Adicionar</button>
+        <ul id="todo-list" class="list-none p-0"></ul>
+      </div>
+    </section>
+
+    <!-- Seção 2 -->
+    <section id="section2" class="flex items-center justify-center h-screen bg-gray-200">
+      <div class="container mx-auto p-6 rounded shadow-md">
+        <h2 class="text-xl font-semibold mb-4">Listas Criadas com JavaScript</h2>
+        <h3 class="text-lg font-medium mb-4">Lista Ordenada</h3>
+        <div id="ordered-list-container" class="mb-4"></div>
+        
+        <h3 class="text-lg font-medium mb-4">Lista Não Ordenada</h3>
+        <div id="unordered-list-container"></div>
+      </div>
+    </section>
+
+    <!-- Seção 3 -->
+    <section id="section3" class="flex items-center justify-center h-screen bg-gray-200">
+      <div class="container mx-auto bg-white p-6 rounded shadow-md">
+        <h2 class="text-xl font-semibold mb-4">Preencha o Formulário</h2>
+        <form>
+          <div class="mb-4">
+            <label for="name" class="block text-gray-700">Nome:</label>
+            <input type="text" id="name" name="name" class="w-full p-2 border border-gray-300 rounded">
+          </div>
+          <div class="mb-4">
+            <label for="email" class="block text-gray-700">Email:</label>
+            <input type="email" id="email" name="email" class="w-full p-2 border border-gray-300 rounded">
+          </div>
+          <div class="mb-4">
+            <label for="password" class="block text-gray-700">Senha:</label>
+            <input type="password" id="password" name="password" class="w-full p-2 border border-gray-300 rounded">
+          </div>
+          <div class="mb-4">
+            <label for="date" class="block text-gray-700">Data de Nascimento:</label>
+            <input type="date" id="date" name="date" class="w-full p-2 border border-gray-300 rounded">
+          </div>
+          <div class="mb-4">
+            <label for="gender" class="block text-gray-700">Gênero:</label>
+            <select id="gender" name="gender" class="w-full p-2 border border-gray-300 rounded">
+              <option value="male">Masculino</option>
+              <option value="female">Feminino</option>
+              <option value="other">Outro</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label for="bio" class="block text-gray-700">Biografia:</label>
+            <textarea id="bio" name="bio" class="w-full p-2 border border-gray-300 rounded"></textarea>
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700">Interesses:</label>
+            <div class="flex items-center mb-2">
+              <input type="checkbox" id="coding" name="interests" value="coding" class="mr-2">
+              <label for="coding" class="text-gray-700">Programação</label>
+            </div>
+            <div class="flex items-center mb-2">
+              <input type="checkbox" id="music" name="interests" value="music" class="mr-2">
+              <label for="music" class="text-gray-700">Música</label>
+            </div>
+            <div class="flex items-center mb-2">
+              <input type="checkbox" id="sports" name="interests" value="sports" class="mr-2">
+              <label for="sports" class="text-gray-700">Esportes</label>
+            </div>
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700">Notificações:</label>
+            <div class="flex items-center mb-2">
+              <input type="radio" id="yes" name="notifications" value="yes" class="mr-2">
+              <label for="yes" class="text-gray-700">Sim</label>
+            </div>
+            <div class="flex items-center mb-2">
+              <input type="radio" id="no" name="notifications" value="no" class="mr-2">
+              <label for="no" class="text-gray-700">Não</label>
+            </div>
+          </div>
+          <button type="submit" class="w-full bg-blue-600 text-white p-2 rounded">Enviar</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Seção 4 -->
+    <section id="section4" class="flex items-center justify-center h-screen bg-gray-200">
+      <div class="flex flex-col items-center w-full max-w-4xl p-6 bg-white rounded shadow-md">
+        <h2 class="text-xl font-semibold mb-4">Produto para a sua cozinha</h2>
+        <div class="flex flex-col md:flex-row w-full h-full">
+          <img src="OIP.jfif" alt="Produto" class="w-full md:w-1/2 h-auto object-cover mb-4 md:mb-0">
+          <video src="907053181175767461.mp4" alt="Vídeo" class="w-full md:w-1/2 h-auto object-cover" controls></video>
+        </div>
+      </div>
+    </section>
+
+     <!-- Seção 5 -->
+<section id="section5" class="flex items-center justify-center h-screen bg-gray-200">
+  <div>Flexbox</div>
+  <div class="flex flex-col items-center w-full max-w-4xl p-6 bg-white rounded shadow-md">
+    <h2 class="text-xl font-semibold mb-4">Título da Seção</h2>
+    <div class="flex flex-wrap justify-between w-full">
+      <div class="flex-1 p-4 m-2 bg-gray-100 rounded shadow-md">
+        <h3 class="text-lg font-semibold">Item 1</h3>
+        <p>Descrição do item 1.</p>
+      </div>
+      <div class="flex-1 p-4 m-2 bg-gray-100 rounded shadow-md">
+        <h3 class="text-lg font-semibold">Item 2</h3>
+        <p>Descrição do item 2.</p>
+      </div>
+      <div class="flex-1 p-4 m-2 bg-gray-100 rounded shadow-md">
+        <h3 class="text-lg font-semibold">Item 3</h3>
+        <p>Descrição do item 3.</p>
+      </div>
+    </div>
   </div>
-  <script src="js/index.js"></script>
+</section>
+
+<section id="section6" class="section6-container bg-gray-200">
+  <div>Grid Layout.</div>
+  <div class="section6-item">
+    <h2 class="text-xl font-semibold">Item A</h2>
+    <p>Conteúdo do item A.</p>
+  </div>
+  <div class="section6-item">
+    <h2 class="text-xl font-semibold">Item B</h2>
+    <p>Conteúdo do item B.</p>
+  </div>
+  <div class="section6-item">
+    <h2 class="text-xl font-semibold">Item C</h2>
+    <p>Conteúdo do item C.</p>
+  </div>
+  <div class="section6-item">
+    <h2 class="text-xl font-semibold">Item D</h2>
+    <p>Conteúdo do item D.</p>
+  </div>
+  <div class="section6-item">
+    <h2 class="text-xl font-semibold">Item E</h2>
+    <p>Conteúdo do item E.</p>
+  </div>
+</section>
+
+
+
+  </main>
+
+  <!-- Rodapé -->
+  <footer class="bg-blue-700 text-white p-6 mt-16">
+    <div class="container mx-auto text-center">
+      <p class="text-sm md:text-base">
+        © 2024. Todos os direitos reservados.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+      document.getElementById('sidebar').classList.toggle('open');
+      document.getElementById('sidebar').classList.toggle('closed');
+    });
+
+    document.getElementById('close-sidebar').addEventListener('click', function() {
+      document.getElementById('sidebar').classList.toggle('open');
+      document.getElementById('sidebar').classList.toggle('closed');
+    });
+
+    // Função para criar lista ordenada
+    function createOrderedList(items) {
+      const ol = document.createElement('ol');
+      items.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        ol.appendChild(li);
+      });
+      return ol;
+    }
+
+    // Função para criar lista não ordenada
+    function createUnorderedList(items) {
+      const ul = document.createElement('ul');
+      items.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        ul.appendChild(li);
+      });
+      return ul;
+    }
+
+    // Itens para as listas
+    const orderedItems = ['Passo 1: Abrir o navegador.', 'Passo 2: Digitar o endereço do site.', 'Passo 3: Pressionar Enter.'];
+    const unorderedItems = ['Maçãs', 'Bananas', 'Laranjas'];
+
+    // Cria e anexa a lista ordenada
+    const orderedListContainer = document.getElementById('ordered-list-container');
+    orderedListContainer.appendChild(createOrderedList(orderedItems));
+
+    // Cria e anexa a lista não ordenada
+    const unorderedListContainer = document.getElementById('unordered-list-container');
+    unorderedListContainer.appendChild(createUnorderedList(unorderedItems));
+
+    // Função para adicionar tarefas
+    document.addEventListener('DOMContentLoaded', () => {
+      const todoInput = document.getElementById('todo-input');
+      const addButton = document.getElementById('add-button');
+      const todoList = document.getElementById('todo-list');
+
+      addButton.addEventListener('click', addTodo);
+
+      todoInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          addTodo();
+        }
+      });
+
+      function addTodo() {
+        const todoText = todoInput.value.trim();
+        if (todoText !== '') {
+          const li = document.createElement('li');
+          li.textContent = todoText;
+          li.className = 'flex justify-between items-center p-2 border-b border-gray-300';
+
+          const deleteButton = document.createElement('button');
+          deleteButton.textContent = 'Deletar';
+          deleteButton.className = 'bg-red-500 text-white p-2 rounded';
+          deleteButton.addEventListener('click', () => {
+            todoList.removeChild(li);
+          });
+
+          li.appendChild(deleteButton);
+          todoList.appendChild(li);
+          todoInput.value = '';
+          todoInput.focus();
+        }
+      }
+    });
+  </script>
 </body>
 </html>
