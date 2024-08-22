@@ -23,17 +23,12 @@ concurrency:
 
 jobs:
   deploy:
-    environment:
-      name: github-pages
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
-      - name: Setup Pages
+      - name: Set up Pages
         uses: actions/configure-pages@v5
-        with:
-          # Consider adding the `branch` input if needed for specific cases
-          # branch: 'gh-pages' 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
