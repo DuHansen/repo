@@ -245,51 +245,76 @@
 
 
 
-     <!-- Seção 5 -->
-<section id="section5" class="flex items-center justify-center h-screen bg-gray-200">
-
-  <div class="flex flex-col items-center w-full max-w-4xl p-6 bg-white rounded shadow-md">
-    <h2 class="text-xl font-semibold mb-4">Título da Seção</h2>
-    <div class="flex flex-wrap justify-between w-full">
-      <div class="flex-1 p-4 m-2 bg-gray-100 rounded shadow-md">
-        <h3 class="text-lg font-semibold">Item 1</h3>
-        <p>Descrição do item 1.</p>
+<!-- Seção 5 -->
+<section id="section5" class="flex items-center justify-center min-h-screen bg-gray-200 p-6">
+  <div class="flex flex-col items-center w-full max-w-4xl bg-white rounded-lg shadow-lg p-6">
+    <h2 class="text-3xl font-bold mb-8 text-gray-800">Escolha seu Plano</h2>
+    <div class="flex flex-wrap justify-center gap-6">
+      <!-- Card do Plano Básico -->
+      <div class="w-full max-w-sm bg-white rounded-lg shadow-lg border border-gray-200 transform hover:scale-105 transition-transform duration-300">
+        <div class="p-6 text-center">
+          <h3 class="text-2xl font-bold mb-2 text-gray-800">Plano Básico</h3>
+          <p class="text-gray-600 mb-4">Acesso a funcionalidades essenciais com suporte básico.</p>
+          <p class="text-3xl font-semibold mb-4 text-blue-600">R$ 29,99/mês</p>
+          <button class="bg-blue-500 text-white py-2 px-6 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300">Selecionar</button>
+        </div>
       </div>
-      <div class="flex-1 p-4 m-2 bg-gray-100 rounded shadow-md">
-        <h3 class="text-lg font-semibold">Item 2</h3>
-        <p>Descrição do item 2.</p>
+      <!-- Card do Plano Intermediário -->
+      <div class="w-full max-w-sm bg-white rounded-lg shadow-lg border border-gray-200 transform hover:scale-105 transition-transform duration-300">
+        <div class="p-6 text-center">
+          <h3 class="text-2xl font-bold mb-2 text-gray-800">Plano Intermediário</h3>
+          <p class="text-gray-600 mb-4">Funcionalidades adicionais com suporte prioritário.</p>
+          <p class="text-3xl font-semibold mb-4 text-blue-600">R$ 59,99/mês</p>
+          <button class="bg-blue-500 text-white py-2 px-6 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300">Selecionar</button>
+        </div>
       </div>
-      <div class="flex-1 p-4 m-2 bg-gray-100 rounded shadow-md">
-        <h3 class="text-lg font-semibold">Item 3</h3>
-        <p>Descrição do item 3.</p>
+      <!-- Card do Plano Premium -->
+      <div class="w-full max-w-sm bg-white rounded-lg shadow-lg border border-gray-200 transform hover:scale-105 transition-transform duration-300">
+        <div class="p-6 text-center">
+          <h3 class="text-2xl font-bold mb-2 text-gray-800">Plano Premium</h3>
+          <p class="text-gray-600 mb-4">Todas as funcionalidades inclusas com suporte VIP.</p>
+          <p class="text-3xl font-semibold mb-4 text-blue-600">R$ 99,99/mês</p>
+          <button class="bg-blue-500 text-white py-2 px-6 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300">Selecionar</button>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="section6" class="section6-container bg-gray-200">
- 
-  <div class="section6-item">
-    <h2 class="text-xl font-semibold">Item A</h2>
-    <p>Conteúdo do item A.</p>
+
+
+<section id="section6" class="bg-gray-200 py-8 flex flex-col items-center">
+  <h1 class="text-3xl font-bold text-center mb-8">Minha Biblioteca do Google Books</h1>
+  <div class="mb-4">
+    <input 
+      type="text" 
+      id="search-query" 
+      class="p-2 border border-gray-300 rounded-md" 
+      placeholder="Digite o assunto para buscar..."
+    />
+    <button 
+      id="search-button" 
+      class="ml-2 bg-blue-500 text-white py-2 px-4 rounded"
+    >
+      Buscar
+    </button>
   </div>
-  <div class="section6-item">
-    <h2 class="text-xl font-semibold">Item B</h2>
-    <p>Conteúdo do item B.</p>
+  <div id="books" class="flex flex-wrap justify-center gap-4"></div>
+  <div id="loading" class="text-center mt-4 text-gray-600">Carregando...</div>
+  <div id="loader" class="loader hidden text-center mt-4">
+    <!-- Loader spinner -->
+    <svg class="animate-spin h-8 w-8 text-blue-500 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+    </svg>
   </div>
-  <div class="section6-item">
-    <h2 class="text-xl font-semibold">Item C</h2>
-    <p>Conteúdo do item C.</p>
-  </div>
-  <div class="section6-item">
-    <h2 class="text-xl font-semibold">Item D</h2>
-    <p>Conteúdo do item D.</p>
-  </div>
-  <div class="section6-item">
-    <h2 class="text-xl font-semibold">Item E</h2>
-    <p>Conteúdo do item E.</p>
-  </div>
+  <script src="/js/books.js" defer></script>
 </section>
+
+
+
+
+
 
 
 
